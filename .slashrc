@@ -1,0 +1,31 @@
+import os
+import logbook
+import logging
+import slash
+
+from datetime import datetime
+from logbook.compat import redirect_logging
+from pathlib import Path, PurePath
+
+from resources.PO.Locators import Locator
+from resources.PO.TestData import TestData
+from resources.testbase.base_test import BaseTest
+
+t = datetime.now()
+ft = t.strftime("%m_%d_%Y_%H_%M_%S")
+
+logbook.set_datetime_format("local")
+redirect_logging()
+
+# Generate folder with the current timestamp
+slash.config.root.log.root = os.path.expanduser(os.getcwd() + "reports/logs"+'/' + ft)
+slash.config.root.run.default_sources = [os.getcwd() + '/tests/scripts']
+
+# This combines all of the individual test logs into the session log
+slash.config.root.log.unified_session_log = True
+
+# This creates a separate log file that contains only errors and failing test cases per session
+slash.config.root.log.highlights_subpath = "{context.session.id}/errors.log"
+
+# This increases the logging verbosity. Default is 13. The value below (11) is equivalent to slash run -vv
+slash.config.root.log.console_level = 11
