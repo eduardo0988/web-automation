@@ -1,0 +1,10 @@
+[2020-10-02 20:17:21.434095] NOTICE: slash.runner: #1: /home/eduardo/web/wz_challenge/tests/scripts/valid_login.py:ValidLogin.test_valid_login
+[2020-10-02 20:17:31.355770] NOTICE: slash.runner: #2: /home/eduardo/web/wz_challenge/tests/scripts/invalid_login.py:InvalidLogin.test_invalid_login
+[2020-10-02 20:17:38.304385] NOTICE: slash.runner: #3: /home/eduardo/web/wz_challenge/tests/scripts/logout.py:ValidLogin.test_valid_login
+[2020-10-02 20:17:52.299165] NOTICE: slash.runner: #4: /home/eduardo/web/wz_challenge/tests/scripts/navigate_to_shopping_cart.py:ValidLogin.test_valid_login
+[2020-10-02 20:18:03.184775] NOTICE: slash.runner: #5: /home/eduardo/web/wz_challenge/tests/scripts/add_single_item.py:SingleItem.test_single_item
+[2020-10-02 20:18:17.328652] NOTICE: slash.runner: #6: /home/eduardo/web/wz_challenge/tests/scripts/add_multiple_items.py:SingleItem.test_single_item
+[2020-10-02 20:18:32.742065] NOTICE: slash.runner: #7: /home/eduardo/web/wz_challenge/tests/scripts/missing_info.py:SingleItem.test_single_item
+[2020-10-02 20:18:45.381495] NOTICE: slash.runner: #8: /home/eduardo/web/wz_challenge/tests/scripts/fill_user_information.py:SingleItem.test_single_item
+[2020-10-02 20:19:01.443740] NOTICE: slash.runner: #9: /home/eduardo/web/wz_challenge/tests/scripts/final_order_items.py:SingleItem.test_single_item
+[2020-10-02 20:19:19.305657] NOTICE: slash.runner: #10: /home/eduardo/web/wz_challenge/tests/scripts/complete_purchase.py:CompletePurchase.test_purchase
