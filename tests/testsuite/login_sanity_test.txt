@@ -1,0 +1,3 @@
+../scripts/valid_login.py
+../scripts/invalid_login.py
+../scripts/logout.py
