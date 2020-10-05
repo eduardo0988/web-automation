@@ -3,10 +3,11 @@ class Locator(): # pylint: disable=too-few-public-methods
     Contains all page object and web-elements from https://www.saucedemo.com/ page.
     """
     #login page locators
-    login_user_name = "user-name"
-    login_password = "password"
+    user_name = "user-name"
+    password = "password"
     login_button = "login-button"
     error_icon = "/html/body/div[2]/div[1]/div/div/form/h3"
+    bot_image = "/html/body/div[2]/div[1]/img"
 
     # home page locators
     menu_button = "menu_button_container"
