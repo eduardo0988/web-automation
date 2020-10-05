@@ -8,6 +8,9 @@ class TestData():  # pylint: disable=too-few-public-methods
     # geckodriver path
     GECKO_PATH = "drivers/gecko/"
 
+    # geckodriver log file name
+    GECKO_LOG_PATH = "reports/logs/geckodriver.log"
+
     # expected title in page
     EXPECTED_TITLE = "Swag Labs"
 
@@ -16,6 +19,7 @@ class TestData():  # pylint: disable=too-few-public-methods
 
     # invalid user
     INVALID_USER = "thief"
+
     # password
     PASSWORD = "secret_sauce"
 
