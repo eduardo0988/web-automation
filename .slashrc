@@ -18,7 +18,7 @@ logbook.set_datetime_format("local")
 redirect_logging()
 
 # Generate folder with the current timestamp
-slash.config.root.log.root = os.path.expanduser(os.getcwd() + "reports/logs"+'/' + ft)
+slash.config.root.log.root = os.path.expanduser(os.getcwd() + "/reports/logs/" + ft)
 slash.config.root.run.default_sources = [os.getcwd() + '/tests/scripts']
 
 # This combines all of the individual test logs into the session log
