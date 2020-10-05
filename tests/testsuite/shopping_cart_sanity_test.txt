@@ -1,0 +1,7 @@
+../scripts/add_single_item.py
+../scripts/add_multiple_items.py
+../scripts/navigate_to_shopping_cart.py
+../scripts/missing_info.py
+../scripts/fill_user_information.py
+../scripts/final_order_items.py
+../scripts/complete_purchase.py
