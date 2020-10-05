@@ -18,8 +18,7 @@ class BaseTest(slash.Test):
         """
         Setup the browser and validate that we are in the login page
         """
-        driver_path = os.path.join(os.getcwd(), TestData.GECKO_PATH)
-        self.driver = webdriver.Firefox(driver_path)
+        self.driver = webdriver.Firefox(TestData.GECKO_PATH, service_log_path=TestData.GECKO_LOG_PATH)
         slash.logger.info("Run Started at:{}".format(datetime.datetime.now()))
         slash.logger.info("Chrome Environment Set Up")
         slash.logger.info("-"*80)
