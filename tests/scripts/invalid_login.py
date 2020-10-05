@@ -32,6 +32,8 @@ class InvalidLogin(BaseTest):
             assert self.driver.find_element_by_id(Locator.menu_button).is_displayed()
             assert self.driver.find_element_by_class_name(Locator.product_label).is_displayed()
             login.scroll_page()
+
+            # logout
             logout = LogoutPage(driver)
             logout.click_burger_button()
             logout.click_logout()

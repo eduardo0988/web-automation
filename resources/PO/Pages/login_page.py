@@ -5,6 +5,7 @@ from time import sleep
 from resources.PO.Locators import Locator
 from resources.PO.TestData import TestData
 
+
 class LoginPage():
     """
     Class wich contains the locators for Login Page objects
@@ -48,7 +49,7 @@ class LoginPage():
     def scroll_page(self):
         """
         Method to scroll down and up the page
-        """ 
+        """
         scroll_down = self.driver.find_element_by_tag_name("html")
         scroll_down.send_keys(Keys.END)
         sleep(TestData.DELAY)

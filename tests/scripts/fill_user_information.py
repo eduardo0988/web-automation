@@ -1,80 +1,70 @@
 import slash
 
-from selenium.webdriver.common.keys import Keys
-from time import sleep
-
+from resources.PO.Locators import Locator
+from resources.PO.Pages.checkout_page import CheckoutPage
+from resources.PO.Pages.home_page import HomePage
+from resources.PO.Pages.login_page import LoginPage
+from resources.PO.Pages.logout_page import LogoutPage
+from resources.PO.Pages.overview_page import OverviewPage
+from resources.PO.Pages.shopping_cart_page import ShoppingCartPage
 from resources.PO.TestData import TestData
 from resources.testbase.base_test import BaseTest
-from resources.PO.Locators import Locator
 
 
-class FillInfo(BaseTest):
+class FillInfoTest(BaseTest):
     """
     Class wich contains test steps to validate the user information page
     """
-    def test_single_item(self):
+    def test_fill_users_info(self):
         """
         Test to validate the user info page
         """
+        driver = self.driver
         try:
+            login = LoginPage(driver)
             # login with standard_user
-            self.locate_user_login.send_keys(TestData.USERS[0])
-            locate_user_password = self.driver.find_element_by_id(Locator.login_password)
-            locate_user_password.clear()
-            locate_user_password.click()
-            locate_user_password.send_keys(TestData.PASSWORD)
-            sleep(TestData.DELAY)
-            locate_login_button = self.driver.find_element_by_id(Locator.login_button)
-            locate_login_button.click()
+            login.enter_username()
+            login.enter_password()
+            login.click_login()
             assert self.driver.find_element_by_id(Locator.menu_button).is_displayed()
-
-            # scroll down the page then up back to the top
-            scroll_down = self.driver.find_element_by_tag_name("html")
-            scroll_down.send_keys(Keys.END)
-            sleep(TestData.DELAY)
-            scroll_down.send_keys(Keys.CONTROL + Keys.HOME)
-            sleep(TestData.DELAY)
+            assert self.driver.find_element_by_class_name(Locator.product_label).is_displayed()
+            login.scroll_page()
 
             # select a the Backpack and add it to the shopping cart then check that that information is displayed
-            self.driver.find_element_by_xpath(Locator.back_pack).click()
+            home = HomePage(driver)
+            home.add_backpack()
 
-            # go to shopping cart
-            cart = self.driver.find_element_by_xpath(Locator.cart_button)
-            cart.click()
-            assert self.driver.find_element_by_xpath(Locator.cart_title).is_displayed()
-            assert self.driver.find_element_by_xpath(Locator.cart_qty).is_displayed()
-            checkout = self.driver.find_element_by_xpath(Locator.checkout_button)
-            assert checkout.is_displayed()
-            checkout.click()
-            assert self.driver.find_element_by_xpath(Locator.user_info_title).is_displayed()
-            sleep(TestData.DELAY)
+            # go to shopping cart and click checkout button
+            home.click_cart_button()
+            cart = ShoppingCartPage(driver)
+            assert cart.find_cart_title().is_displayed()
+            cart.click_checkout_button()
 
-            # go to checkout page and fill user's info
-            info = [(Locator.first_name, TestData.FIRST_NAME), (Locator.last_name, TestData.LAST_NAME),
-                    (Locator.zip_code, TestData.ZIP_CODE)]
+            # go to checkout page
+            checkout = CheckoutPage(driver)
+            assert checkout.locate_user_info_title().is_displayed()
 
-            for field in info:
-                location, data = field
-                locate_field = self.driver.find_element_by_xpath(location)
-                locate_field.clear()
-                locate_field.click()
-                locate_field.send_keys(data)
-                sleep(TestData.DELAY)
+            # go to checkout page and fill user's info then press continue button
+            checkout.complete_user_info()
+            checkout.click_continue_button()
 
-            continue_button = self.driver.find_element_by_xpath(Locator.continue_button)
-            continue_button.click()
+            # go to overview page and check that title and payment info are displayed
+            over = OverviewPage(driver)
+            assert over.locate_overview_title().is_displayed()
+            assert over.locate_payment_info().is_displayed()
 
-            assert self.driver.find_element_by_xpath(Locator.overview_title).is_displayed()
-            assert self.driver.find_element_by_xpath(Locator.payment_info).is_displayed()
-
-            cancel = self.driver.find_element_by_xpath(Locator.overview_cancel_button)
-            cancel.click()
-            sleep(TestData.DELAY)
+            over.click_overview_cancel()
 
             # remove item from inventory page
-            remove_item = self.driver.find_element_by_xpath(Locator.remove_backpack)
-            remove_item.click()
-            sleep(TestData.DELAY)
+            home = HomePage(driver)
+            home.remove_backpack()
+
+            # logout
+            logout = LogoutPage(driver)
+            logout.click_burger_button()
+            logout.click_logout()
+            assert login.bot_image
+            slash.logger.info("Sucessfully logged out from {}".format(TestData.BASE_URL))
 
         except Exception as exc:
             slash.add_failure("{}".format(exc))
