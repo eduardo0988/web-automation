@@ -12,6 +12,7 @@ This repo contains automated test scripts designed within Slash and Selenium Web
 Using the **terminal**, ensure your virtual environment is activated and simply use the following command:
 
 `slash run path_to_test/test_name.py` to execute a single file
+
 `slash run -f path_to_test_suite.txt` to execute a test suite
 
 ## Logs
