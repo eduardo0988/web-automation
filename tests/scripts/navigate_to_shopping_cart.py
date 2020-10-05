@@ -28,11 +28,21 @@ class ShoppingCartNavigation(BaseTest):
             assert self.driver.find_element_by_class_name(Locator.product_label).is_displayed()
             login.scroll_page()
 
+            # select a the Backpack and add it to the shopping cart then check that that information is displayed
+            home = HomePage(driver)
+            home.add_backpack()
+
             # go to shopping cart
             home = HomePage(driver)
             home.click_cart_button()
             cart = ShoppingCartPage(driver)
             assert cart.find_cart_title().is_displayed()
+
+            # remove item from cart
+            cart = ShoppingCartPage(driver)
+            cart.remove_item_one()
+            if not self.driver.find_element_by_xpath(Locator.cart_qty).is_displayed():
+                slash.logger.info("Cart is empty")
 
             # logout
             logout = LogoutPage(driver)
